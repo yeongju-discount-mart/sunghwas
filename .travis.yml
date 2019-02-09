@@ -1,0 +1,23 @@
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - 8.10.0
+      install:
+        - npm install
+      script:
+        - npm run production
+    
+    - language: php
+      php:
+        - 7.2.8
+      before_install:
+        - mv .env.example .env
+      install:
+        - composer install
+      script:
+        - php artisan key:generate
+        - phpunit
+
+notifications:
+  email: false
