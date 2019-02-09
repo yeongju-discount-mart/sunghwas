@@ -17,6 +17,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('user_id');
             $table->string('password');
+            $table->integer('love_point');
+            $table->integer('hungry_point');
+            $table->integer('level');
+            $table->integer('score');
             $table->timestamps();
         });
     }
