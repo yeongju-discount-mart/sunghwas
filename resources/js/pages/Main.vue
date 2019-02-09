@@ -7,7 +7,8 @@
           <div class="absolute bg-white p-8 shadow text-black" v-if="dropdown">
             <div>{{ getUser.user_id }} 님</div>
             <div class="mt-3">레벨: {{getUser.level}}</div>
-            <div class="mt-1">점수: {{getUser.score}}</div>
+            <div class="mt-3">점수: {{getUser.score}}</div>
+            <button @click="logout()" class="btn mt-3 text-sm rounded px-2 w-full bg-white text-sm leading-loose border border-purple text-purple hover:bg-purple hover:text-white">로그아웃</button>
           </div>
         </div>
       </div>
@@ -123,6 +124,11 @@ export default {
       }
     }
   },
+  created() {
+    if (this.$store.getters.getCurrentUser.id == null) {
+      this.$router.push("/login");
+    }
+  },
   methods: {
     async update(number) {
       await this.playSound(number);
@@ -137,6 +143,10 @@ export default {
     },
     setDropdown(bool) {
       this.dropdown = bool;
+    },
+    logout() {
+      this.$store.commit('setCurrentUser', {});
+      this.$router.push("/login");
     }
   }
 }

@@ -3,6 +3,8 @@ import Vuex from "vuex";
 
 import axios from "axios";
 
+import createPersistedState from 'vuex-persistedstate';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -29,6 +31,6 @@ export default new Vuex.Store({
         alert("에러 발생! 재접속해 주세요.");
       });
     },
-
-  }
+  },
+  plugins: [createPersistedState()]
 });
