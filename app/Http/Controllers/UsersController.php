@@ -18,7 +18,7 @@ class UsersController extends Controller
         $user->score = 0;
         $user->save();
 
-        return response()->json('OK', 200);
+        return response()->json('OK', 201);
     }
 
     public function login(Request $request)
@@ -31,5 +31,11 @@ class UsersController extends Controller
         }
 
         return response()->json($user, 200);
+    }
+
+    public function getAll() {
+        $users = User::all();
+
+        return response()->json($users, 200);
     }
 }

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="{{ mix('assets/logo.jpg') }}" type="image/x-icon">
   <title>Sunghwas</title>
 </head>
 <body>
