@@ -137,7 +137,6 @@ export default {
     },
     playSound(number) {
       if (number < 7) return;
-
       const audio = new Audio(`./../../assets/sound_${number}.m4a`);
       audio.play();
     },
