@@ -11,4 +11,11 @@
 |
 */
 
+Route::prefix('api')->group(function () {
+  Route::prefix('auth')->group(function () {
+    Route::post('register', 'UsersController@create');
+    Route::get('getAll', 'UsersController@getAll');
+  });
+});
+
 Route::get('/{any}', 'SpaController')->where('any', '.*');

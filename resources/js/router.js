@@ -4,14 +4,19 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 // Imports
-import Test from "./components/Test";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
 
 export default new VueRouter({
   mode: "history",
   routes: [
     {
       path: "/",
-      component: Test
+      component: Main
+    },
+    {
+      path: "/login",
+      component: Login
     }
   ]
 });
