@@ -17,6 +17,9 @@ Route::prefix('api')->group(function () {
     Route::get('getAll', 'UsersController@getAll');
     Route::post('login', 'UsersController@login');
   });
+    Route::post('user-update', 'LevelsController@hwaPoints');
+    Route::get('user', 'LevelsController@getUserInfo');
 });
+
 
 Route::get('/{any}', 'SpaController')->where('any', '.*');

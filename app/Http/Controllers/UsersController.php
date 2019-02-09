@@ -12,6 +12,10 @@ class UsersController extends Controller
         $user = new User;
         $user->user_id = $request->input('user_id');
         $user->password = $request->input('password');
+        $user->love_point = 25;
+        $user->hungry_point = 50;
+        $user->level = 0;
+        $user->score = 0;
         $user->save();
 
         return response()->json('OK', 200);
