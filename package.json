@@ -25,6 +25,6 @@
         "laravel-mix": "^4.0.12",
         "normalize.css": "^8.0.1",
         "vue-loader": "^15.6.2",
-        "vue-template-compiler": "2.5.17"
+        "vue-template-compiler": "^2.6.4"
     }
 }
