@@ -3,7 +3,13 @@
     <div class="bg-purple-dark shadow">
       <div class="container py-4 mx-auto text-white text-sm leading-tight">
         Sunghwas
-        <div class="float-right">{{ getUser.user_id }} 님</div>
+        <div class="float-right cursor-pointer flex items-baseline" @mouseenter="setDropdown(true)" @mouseleave="setDropdown(false)">{{ getUser.user_id }} 님
+          <div class="absolute bg-white p-8 shadow text-black" v-if="dropdown">
+            <div>{{ getUser.user_id }} 님</div>
+            <div class="mt-3">레벨: {{getUser.level}}</div>
+            <div class="mt-1">점수: {{getUser.score}}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="flex container mx-auto mt-4">
@@ -76,7 +82,7 @@ export default {
   name: "Main",
   data() {
     return {
-
+      dropdown: false
     }
   },
   computed: {
@@ -128,6 +134,9 @@ export default {
 
       const audio = new Audio(`./../../assets/sound_${number}.m4a`);
       audio.play();
+    },
+    setDropdown(bool) {
+      this.dropdown = bool;
     }
   }
 }
