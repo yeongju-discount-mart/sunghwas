@@ -2,7 +2,8 @@
   <div id="login">
     <div class="bg bg-cover fixed"></div>
     <div class="sidebar fixed bg-white shadow-md w-1/4 h-screen pin-r py-32 px-16">
-      <div class="mb-32"></div>
+      <img :src="require('./../../assets/logo.jpg')" alt="">
+      <div class="mb-8"></div>
       <input v-model="userId" class="appearance-none leading-tight border-grey-dark border rounded w-full py-2 px-3 text-grey-darker" type="text" placeholder="ID">
       <div class="mb-8"></div>
       <input v-model="password" class="appearance-none leading-tight border-grey-dark border rounded w-full py-2 px-3 text-grey-darker" type="text" placeholder="Password">
@@ -27,6 +28,22 @@ export default {
     return {
       userId: "",
       password: ""
+    }
+  },
+  methods: {
+    login() {
+      console.log();
+      const body = {
+        user_id: this.userId,
+        password: this.password
+      };
+      return axios.post("/api/auth/login", body)
+      .then(res => {
+        this.$store.commit("setCurrentUser", res.data);
+      })
+      .catch(err => {
+        alert("로그인 실패");
+      });
     }
   }
 }
