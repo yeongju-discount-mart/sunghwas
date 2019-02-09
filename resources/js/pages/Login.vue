@@ -1,12 +1,34 @@
 <template>
   <div id="login">
-    <div class="bg"></div>
+    <div class="bg bg-cover fixed"></div>
+    <div class="sidebar fixed bg-white shadow-md w-1/4 h-screen pin-r py-32 px-16">
+      <div class="mb-32"></div>
+      <input v-model="userId" class="appearance-none leading-tight border-grey-dark border rounded w-full py-2 px-3 text-grey-darker" type="text" placeholder="ID">
+      <div class="mb-8"></div>
+      <input v-model="password" class="appearance-none leading-tight border-grey-dark border rounded w-full py-2 px-3 text-grey-darker" type="text" placeholder="Password">
+      <div class="mb-16"></div>
+      <div class="text-center mb-6">
+        <button @click="login()" class="btn rounded px-4 py-1 w-full bg-white leading-normal border border-purple text-purple hover:bg-purple hover:text-white">로그인</button>
+      </div>
+      <div class="text-center mb-12">
+        <button @click="register()" class="btn rounded px-4 py-1 w-full bg-white leading-normal border border-purple text-purple hover:bg-purple hover:text-white">회원가입</button>
+      </div>
+      <div class="text-center text-xs text-grey">
+        Copyright ⓒ 2019 <a class="link text-grey hover:text-grey-darker" target="_blank" href="https://github.com/yeongju-discount-mart">Yeongju Discount Mart</a>, All rights reserved.
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  name: "Login",
+  data() {
+    return {
+      userId: "",
+      password: ""
+    }
+  }
 }
 </script>
 
@@ -14,8 +36,27 @@ export default {
 .bg {
   background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../../assets/loginbg.jpg') center center no-repeat;
   background-size: cover;
-  position: fixed;
   width: 100vw;
   height: 100vh;
+}
+
+.btn {
+  transition: all 0.3s;
+}
+
+input {
+  transition: all 0.3s;
+  outline: none;
+  &:focus {
+    border-color: #9561E2;
+  }
+}
+
+.link {
+  text-decoration: none;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>
