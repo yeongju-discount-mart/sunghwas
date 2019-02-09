@@ -63,11 +63,13 @@ class LevelsController extends Controller
             $point = $user->love_point + 10;
             $user->love_point = $point > 100 ? 100 : $point;
         }
-        else {
-
-        }
 
         $user->save();
         return response()->json($user, 201);
+    }
+
+    public function getUserInfo(Request $request) {
+        $user = User::find($request->input('id'));
+        return response()->json($user, 200);
     }
 }

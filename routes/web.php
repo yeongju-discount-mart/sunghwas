@@ -18,6 +18,7 @@ Route::prefix('api')->group(function () {
     Route::post('login', 'UsersController@login');
   });
     Route::post('user-update', 'LevelsController@hwaPoints');
+    Route::get('user', 'LevelsController@getUserInfo');
 });
 
 
