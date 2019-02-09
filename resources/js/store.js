@@ -20,8 +20,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loginUser(context, payload) {
-      
-    }
+    retrieveUser(context, payload) {
+      return axios.get(`/api/user?id=${payload}`)
+      .then(res => {
+        context.commit('setCurrentUser', res.data);
+      })
+      .catch(err => {
+        alert("에러 발생! 재접속해 주세요.");
+      });
+    },
+
   }
 });

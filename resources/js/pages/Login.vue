@@ -40,6 +40,7 @@ export default {
       return axios.post("/api/auth/login", body)
       .then(res => {
         this.$store.commit("setCurrentUser", res.data);
+        this.$router.push("/");
       })
       .catch(err => {
         alert("로그인 실패");

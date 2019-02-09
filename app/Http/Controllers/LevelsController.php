@@ -10,7 +10,7 @@ class LevelsController extends Controller
 {
     public function hwaPoints(Request $request) {
         $user = User::find($request->input('id'));
-        if($user == NULL) return response()->json(' ', 404);
+        if ($user == NULL) return response()->json([], 404);
         $pointType = $request->input('pointType');
 
         if ($pointType == 1) {
@@ -69,7 +69,7 @@ class LevelsController extends Controller
     }
 
     public function getUserInfo(Request $request) {
-        $user = User::find($request->input('id'));
+        $user = User::find($request->query('id'));
         return response()->json($user, 200);
     }
 }
