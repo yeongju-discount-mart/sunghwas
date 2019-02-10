@@ -92,25 +92,25 @@ export default {
     },
     getStatus() {
       // TODO: 밸런스 조절부탁
-      if (this.getUser.hunger_point > 80) {
+      if (this.getUser.hungry_point > 80) {
         return {
           src: require('./../../assets/sunghwa_4.jpg'),
           text: `성화는 지금 <span class="text-orange-dark">배가 불러요!</span>`
         };
       }
-      else if (this.getUser.hunger_point > 30 && this.getUser.love_point > 60) {
+      else if (this.getUser.hungry_point > 30 && this.getUser.love_point > 60) {
         return {
           src: require('./../../assets/sunghwa_1.jpg'),
           text: `성화는 지금 <span class="text-pink-dark">행복해요!</span>`
         };
       }
-      else if (this.getUser.love_point > 30) {
+      else if (this.getUser.love_point <= 24) {
         return {
-          src: require('./../../assets/sunghwa_2.jpg'),
-          text: `성화는 지금 그저 그래요!`
+          src: require('./../../assets/sunghwa_3.jpg'),
+          text: `성화는 지금 <span class="text-blue">슬퍼요!</span>`
         };
       }
-      else if (this.getUser.hunger_point > 0) {
+      else if (this.getUser.hungry_point < 20) {
         return {
           src: require('./../../assets/sunghwa_5.jpg'),
           text: `성화는 지금 <span class="text-red">배가 너무 고파요!</span>`
@@ -118,8 +118,8 @@ export default {
       }
       else {
         return {
-          src: require('./../../assets/sunghwa_3.jpg'),
-          text: `성화는 지금 <span class="text-blue">슬퍼요!</span>`
+          src: require('./../../assets/sunghwa_2.jpg'),
+          text: `성화는 지금 그저 그래요!`
         };
       }
     }
