@@ -16,6 +16,7 @@ class UsersController extends Controller
         $user->hungry_point = 50;
         $user->level = 0;
         $user->score = 0;
+        $user->money = 15000;
         $user->save();
 
         return response()->json('OK', 201);

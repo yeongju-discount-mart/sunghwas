@@ -36,6 +36,7 @@ export default {
       };
       return axios.post("/api/auth/register", body)
       .then(res => {
+        alert("회원가입에 성공하셨습니다. 로그인 해 주십시오.");
         this.$router.push("/login");
       })
       .catch(err => {

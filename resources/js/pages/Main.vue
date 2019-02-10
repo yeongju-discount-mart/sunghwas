@@ -8,6 +8,7 @@
             <div>{{ getUser.user_id }} 님</div>
             <div class="mt-3">레벨: {{getUser.level}}</div>
             <div class="mt-3">점수: {{getUser.score}}</div>
+            <div class="mt-3">돈: {{getUser.money}}</div>
             <button @click="logout()" class="btn mt-3 text-sm rounded px-2 w-full bg-white text-sm leading-loose border border-purple text-purple hover:bg-purple hover:text-white">로그아웃</button>
           </div>
         </div>
@@ -92,7 +93,13 @@ export default {
     },
     getStatus() {
       // TODO: 밸런스 조절부탁
-      if (this.getUser.hungry_point > 80) {
+      if (this.getUser.love_point <= 24) {
+        return {
+          src: require('./../../assets/sunghwa_3.jpg'),
+          text: `성화는 지금 <span class="text-blue">슬퍼요!</span>`
+        };
+      }
+      else if (this.getUser.hungry_point > 80) {
         return {
           src: require('./../../assets/sunghwa_4.jpg'),
           text: `성화는 지금 <span class="text-orange-dark">배가 불러요!</span>`
@@ -102,12 +109,6 @@ export default {
         return {
           src: require('./../../assets/sunghwa_1.jpg'),
           text: `성화는 지금 <span class="text-pink-dark">행복해요!</span>`
-        };
-      }
-      else if (this.getUser.love_point <= 24) {
-        return {
-          src: require('./../../assets/sunghwa_3.jpg'),
-          text: `성화는 지금 <span class="text-blue">슬퍼요!</span>`
         };
       }
       else if (this.getUser.hungry_point < 20) {
@@ -131,6 +132,14 @@ export default {
   },
   methods: {
     async update(number) {
+      if (this.getUser.love_point <= 20) {
+        switch (number) {
+          case 1:
+          case 8:
+            alert('자살위험이 감지되었습니다.');
+        }
+      }
+
       await this.playSound(number);
       await this.$http.post('/api/user-update', { id: this.$store.getters.getCurrentUser.id, pointType: number }).then(res => {}).catch(err => { alert("성화가 잔뜩 화가 났어요."); });
       await this.$store.dispatch('retrieveUser', this.$store.getters.getCurrentUser.id);

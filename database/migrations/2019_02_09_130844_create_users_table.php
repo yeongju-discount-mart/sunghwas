@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('hungry_point');
             $table->integer('level');
             $table->integer('score');
+            $table->integer('money');
             $table->timestamps();
         });
     }

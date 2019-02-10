@@ -13,24 +13,38 @@ class LevelsController extends Controller
         if ($user == NULL) return response()->json([], 404);
         $pointType = $request->input('pointType');
 
-        if ($pointType == 1) {                                  //급식
+        if ($pointType == 1 && $user->love_point > 20) {                                  //급식
             $point = $user->hungry_point + 25;
             $user->hungry_point = $point > 100 ? 100 : $point;
-            $user->score += 5;
+
+            $point = $user->love_point - 8;
+            $user->love_point = $point < 0 ? 0 : $point;
         }
-        else if($pointType == 2) {                              //간식
-            $point = $user->hungry_point + 5;
+        else if($pointType == 2 && $user->money >= 2000) {                              //간식
+            $point = $user->hungry_point + 12;
             $user->hungry_point = $point > 100 ? 100 : $point;
 
+            $user->money -= 2000;
+
+            $rand_pix = 1;
+
+            if ($user->love_point <= 20) {
+                $rand_pix = 2;
+            }
+
             $rand_num = rand(1, 5);
-            if ($rand_num <= 1) {                               //간식(확률)
-                $point = $user->love_point + 12;
+            if ($rand_num <= $rand_pix) {                               //간식(확률)
+                $point = $user->love_point + 10;
                 $user->love_point = $point > 100 ? 100 : $point;
             }
+
             $user->score += 2;
         }
-        else if($pointType == 3){                               //영화
+        else if($pointType == 3 && $user->money >= 10000){                               //영화
             $rand_num = rand(1, 100);
+
+            $user->money -= 10000;
+
             if ($rand_num <= 33) {                              //영화(감소확률)
                 $point = $user->love_point - 11;
                 $user->love_point = $point < 0 ? 0 : $point;
@@ -40,21 +54,32 @@ class LevelsController extends Controller
                 $user->score += 7;
             }
         }
-        else if($pointType == 4){                               //데이트
+        else if($pointType == 4 && $user->money >= 50000){                               //데이트
             $rand_num = rand(1, 100);
-            if ($rand_num <= 75) {                              //데이트(증가확률)
+
+            $user->money -= 50000;
+
+            $per = 75;
+
+            if ($user->love_point <= 20) {
+                $per = 45;
+            }
+
+            if ($rand_num <= $per) {                              //데이트(증가확률)
                 $point = $user->love_point + 22;
                 $user->love_point = $point > 100 ? 100 : $point;
                 $user->score += 20;
             } else {                                            //데이트(감소확률)
-                $point = $user->love_point - 24;
+                $point = $user->love_point - 12;
                 $user->love_point = $point < 0 ? 0 : $point;
-                $user->score -= 22;
+                $user->score -= 20;
             }
         }
         else if($pointType == 5){                               //코딩
             $point = $user->hungry_point - 7;
             $user->hungry_point = $point < 0 ? 0 : $point;
+
+            $user->money += 6970;
 
             $user->score += 7;
         }
@@ -78,7 +103,7 @@ class LevelsController extends Controller
                 $user->point += 1;
             }
         }
-        else if($pointType == 8){                               //뭐 해?
+        else if($pointType == 8 && $user->love_point > 20){                               //뭐 해?
             $rand_num = rand(1, 5);
 
             if ($rand_num <= 2) {                               //뭐 해?(증가확률)
@@ -96,16 +121,9 @@ class LevelsController extends Controller
             $user->love_point = $point > 100 ? 100 : $point;
         }
         else if($pointType == 10){                              //잘 지내?
-            $rand_num = rand(1, 100);
-
-            if ($rand_num <= 68) {                              //
-                $point = $user->love_point + 7;
+            if ($user->love_point <= 20) {
+                $point = $user->love_point + 6;
                 $user->love_point = $point > 100 ? 100 : $point;
-                $user->score += 15;
-            } else {
-                $point = $user->love_point - 10;
-                $user->love_point = $point < 0 ? 0 : $point;
-                $user->score -= 8;
             }
         }
         else if($pointType == 11){
@@ -147,6 +165,12 @@ class LevelsController extends Controller
             $user->love_point = 25;
             $user->score += 225;
         }
+
+        $point = $user->love_point - 3;
+        $user->love_point = $point < 0 ? 0 : $point;
+
+        $point = $user->hungry_point - 10;
+        $user->hungry_point = $point < 0 ? 0 : $point;
 
         $user->save();
         return response()->json($user, 201);
